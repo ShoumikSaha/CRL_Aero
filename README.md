@@ -36,3 +36,6 @@ We used a linear regressor as the predictor. This trained predictor will be save
 
 ## Testing
 To evaluate the model, use the script `test.py`. It will generate MAE and average accuracy.
+
+## Citation
+Please cite our work if you use our method, or any part of this codebase.
