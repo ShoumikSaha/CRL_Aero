@@ -30,12 +30,15 @@ def parse_option():
     parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
     parser.add_argument('--trial', type=str, default='8', help='id for recording multiple runs')
 
+    parser.add_argument('--encoder_input_size', type=int, default=404, help='encoder input size')
+    parser.add_argument('--predictor_input_size', type=int, default=512, help='predictor input size')
+
     parser.add_argument('--data_folder', type=str, default='./data', help='path to custom dataset')
     parser.add_argument('--dataset', type=str, default='NACA', choices=['Ellipsoid', 'NACA'], help='dataset')
     parser.add_argument('--model', type=str, default='MLP', choices=['resnet18', 'resnet50', 'resnet1D', 'MLP'])
     parser.add_argument('--resume', type=str, default='', help='resume ckpt path')
     #parser.add_argument('--aug', type=str, default='crop,flip,color,grayscale', help='augmentations')
-    parser.add_argument('--aug', type=str, default='crop', help='augmentations')
+    #parser.add_argument('--aug', type=str, default='crop', help='augmentations')
     parser.add_argument('--label_name', type=str, default='cd', help='label name (cl/cd)')
 
     # RnCLoss Parameters
@@ -46,9 +49,9 @@ def parse_option():
     opt = parser.parse_args()
 
     opt.model_path = './save/{}_models'.format(opt.dataset)
-    opt.model_name = 'RnC_MLP_CD_{}_{}_ep_{}_lr_{}_d_{}_wd_{}_mmt_{}_bsz_{}_aug_{}_temp_{}_label_{}_feature_{}_trial_{}'. \
+    opt.model_name = 'RnC_MLP_CD_{}_{}_ep_{}_lr_{}_d_{}_wd_{}_mmt_{}_bsz_{}_temp_{}_label_{}_feature_{}_trial_{}'. \
         format(opt.dataset, opt.model, opt.epochs, opt.learning_rate, opt.lr_decay_rate, opt.weight_decay, opt.momentum,
-               opt.batch_size, opt.aug, opt.temp, opt.label_diff, opt.feature_sim, opt.trial)
+               opt.batch_size, opt.temp, opt.label_diff, opt.feature_sim, opt.trial)
     if len(opt.resume):
         opt.model_name = opt.resume.split('/')[-2]
 
@@ -101,9 +104,11 @@ def set_loader(opt):
 
 
 def set_model(opt):
-    #model = Encoder(name=opt.model)
-    #model = ResNet1D(in_channels=6, base_filters=6, kernel_size=1, stride=1, groups=1, n_block=1, n_classes=2048, verbose=True)
-    model = MLP_NACA(input_size=404, n_classes=512, verbose=False)
+    
+    input_size = opt.encoder_input_size
+    n_classes = opt.predictor_input_size
+
+    model = MLP_NACA(input_size=input_size, n_classes=n_classes, verbose=False)
     criterion = RnCLoss(temperature=opt.temp, label_diff=opt.label_diff, feature_sim=opt.feature_sim)
     
 

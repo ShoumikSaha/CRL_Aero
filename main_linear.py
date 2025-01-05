@@ -27,11 +27,13 @@ def parse_option():
     parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
     parser.add_argument('--trial', type=str, default='0', help='id for recording multiple runs')
 
+    parser.add_argument('--encoder_input_size', type=int, default=404, help='encoder input size')
+    parser.add_argument('--predictor_input_size', type=int, default=512, help='predictor input size')
+
     parser.add_argument('--data_folder', type=str, default='./data', help='path to custom dataset')
     parser.add_argument('--dataset', type=str, default='NACA', choices=['Ellipsoid', 'NACA'], help='dataset')
     parser.add_argument('--model', type=str, default='MLP', choices=['resnet18', 'resnet50', 'resnet1D', 'MLP'])
     parser.add_argument('--resume', type=str, default='', help='resume ckpt path')
-    parser.add_argument('--aug', type=str, default='crop,flip,color,grayscale', help='augmentations')
     parser.add_argument('--label_name', type=str, default='cd', help='label name (cl/cd)')
 
     parser.add_argument('--ckpt', type=str, default='', help='path to the trained encoder')
@@ -62,10 +64,6 @@ def parse_option():
 
 
 def set_loader(opt):
-    # train_transform = get_transforms(split='train', aug=opt.aug)
-    # val_transform = get_transforms(split='val', aug=opt.aug)
-    # print(f"Train Transforms: {train_transform}")
-    # print(f"Val Transforms: {val_transform}")
 
     train_transform_fn = get_my_transforms()
     train_transform = MyTransform(train_transform_fn)
@@ -97,8 +95,11 @@ def set_loader(opt):
 
 
 def set_model(opt):
-    # model = Encoder(name=opt.model)
-    model = MLP_NACA(input_size=404, n_classes=512, verbose=False)
+
+    input_size = opt.encoder_input_size
+    n_classes = opt.predictor_input_size
+
+    model = MLP_NACA(input_size=input_size, n_classes=n_classes, verbose=False)
     criterion = torch.nn.L1Loss()
 
     # dim_in = model_dict[opt.model][1]
