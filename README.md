@@ -15,18 +15,24 @@ Convert your dataset into a csv format, and keep a column with `split` for train
 We would also recommend to normalize your data before using it for the model. 
 The `dataset.py` file will handle the dataset. Depending on your input file path, you might have to change the CSV file path.
 
-## Training the Models
+## Training
 
 ### Phase 1
 In this phase, **train the encoder model by running `main_smk_rnc.py`.** 
 
-Remember to parse the right values, especially for `data_folder`, `dataset`, `epochs`, `learning_rate`, `batch_size`, etc.
+Remember to parse the right values, especially for `data_folder`, `dataset`, and hyperparameters like `epochs`, `learning_rate`, `batch_size`, etc. If you use a different dataset, you might have to change the `encoder_input_size` depending on your data dimension.
 
 After running this file, it will save the trained model in a folder named `save`. 
-We used 2 different MLP models as the encoder for our use cases. You can write your own encoder instead of using ours from `my_mlp.py`.
+We used 2 different MLP models as the encoder for our use cases. You can write your own encoder instead of using ours from `my_mlp.py`. 
 
 
 ### Phase 2
 In this phase, **train the predictor model by running `main_linear.py`.** 
 
-Remember to pass the path of the saved encoder model from Phase 1 through the `ckpt` argument.
+Remember to pass the path of the saved encoder model from Phase 1 through the `ckpt` argument. 
+
+We used a linear regressor as the predictor. This trained predictor will be saved in the same folder as Phase 1.
+
+
+## Testing
+To evaluate the model, use the script `test.py`. It will generate MAE and average accuracy.
