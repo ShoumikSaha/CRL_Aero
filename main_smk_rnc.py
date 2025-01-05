@@ -6,9 +6,7 @@ import torch
 import time
 from dataset import *
 from utils import *
-from model import Encoder
 from loss import RnCLoss
-from my_resnet import *
 from my_mlp import *
 
 print = logging.info

@@ -4,8 +4,6 @@ import sys
 import logging
 import torch
 import time
-from model import Encoder, model_dict
-from my_resnet import ResNet1D
 from my_mlp import *
 from dataset import *
 from utils import *
@@ -14,7 +12,7 @@ import csv
 from random import randint
 import pandas as pd
 
-from data.data_editor import *
+# from data.data_editor import *
 
 ckpt_path = './save/NACA_models/RnC_MLP_CD_NACA_MLP_ep_100_lr_0.5_d_0.1_wd_0.0001_mmt_0.9_bsz_256_aug_crop_temp_2_label_l1_feature_l2_trial_8/ckpt_epoch_100.pth'
 regressor_path = './save/NACA_models/RnC_MLP_CD_NACA_MLP_ep_100_lr_0.5_d_0.1_wd_0.0001_mmt_0.9_bsz_256_aug_crop_temp_2_label_l1_feature_l2_trial_8/Regressor_NACA_ep_100_lr_0.05_d_0.1_wd_0_mmt_0.9_bsz_256_trial_0_best.pth'

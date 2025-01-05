@@ -4,7 +4,6 @@ import sys
 import logging
 import torch
 import time
-from model import Encoder, model_dict
 from dataset import *
 from utils import *
 from my_mlp import *
