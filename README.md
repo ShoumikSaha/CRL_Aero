@@ -18,11 +18,15 @@ The `dataset.py` file will handle the dataset. Depending on your input file path
 ## Training the Models
 
 ### Phase 1
-In this phase, **train the encoder MLP model by running `main_smk_rnc.py`.** 
-
+In this phase, **train the encoder model by running `main_smk_rnc.py`.** 
 
 Remember to parse the right values, especially for `data_folder`, `dataset`, `epochs`, `learning_rate`, `batch_size`, etc.
 
-After running this file, it will save the trained model in a folder named `save`.
+After running this file, it will save the trained model in a folder named `save`. 
+We used 2 different MLP models as the encoder for our use cases. You can write your own encoder instead of using ours from `my_mlp.py`.
 
 
+### Phase 2
+In this phase, **train the predictor model by running `main_linear.py`.** 
+
+Remember to pass the path of the saved encoder model from Phase 1 through the `ckpt` argument.
