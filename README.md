@@ -38,4 +38,19 @@ We used a linear regressor as the predictor. This trained predictor will be save
 To evaluate the model, use the script `test.py`. It will generate MAE and average accuracy.
 
 ## Citation
-Please cite our work if you use our method, or any part of this codebase.
+Please cite our work if you use our method, or any part of this codebase in your work.
+
+```bibtex
+
+@inbook{doi:10.2514/6.2025-0477,
+author = {Tasfia Maysa Binte Kamal and Shoumik Saha},
+title = {Contrastive Representation Learning for Regression-Based Aerodynamics Problem: Fuselage and Airfoil},
+booktitle = {AIAA SCITECH 2025 Forum},
+chapter = {},
+pages = {},
+doi = {10.2514/6.2025-0477},
+URL = {https://arc.aiaa.org/doi/abs/10.2514/6.2025-0477},
+eprint = {https://arc.aiaa.org/doi/pdf/10.2514/6.2025-0477},
+abstract = { The field of aerodynamics is often constrained by data scarcity, which limits the development of accurate predictive models due to the time and resource demands of traditional data generation methods. This challenge is particularly pronounced in the emerging domain of electric Vertical Take-Off and Landing (eVTOL) aircraft, where diverse configurations—spanning over 1,000 unique designs—complicate aerodynamic modeling. While Computational Fluid Dynamics (CFD) and wind tunnel testing are accurate, their scalability is limited, and machine learning approaches are hindered by the lack of extensive labeled datasets. To address these challenges, this study employs contrastive representation learning, a self-supervised technique that learns robust features from relationships between similar and dissimilar data. By generating diverse eVTOL fuselage and airfoil datasets through systematic shape parameterization and validating results via CFD, the proposed framework delivers scalable and accurate aerodynamic predictions. This tailored application of contrastive learning offers a practical and efficient alternative to traditional methods, addressing both design diversity and data scarcity in aerodynamic modeling. }
+}
+```
